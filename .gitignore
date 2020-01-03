@@ -4,4 +4,11 @@
 *.swp
 *.swo
 
+*.fits
+*.jpg
+*.JPG
+*.JPEG
+*.jpeg
+*.pdf
+
 loc_*
