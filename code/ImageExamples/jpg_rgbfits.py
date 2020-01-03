@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#
 """
     Code to split a jpg image into R,G,B channels and write them as fits files
 
@@ -24,10 +24,11 @@ def fitsorder(jarr):
         for ww in range(jarr.shape[1]):
             for hh in range(jarr.shape[0]):
                 farr[cc,ww,hh] = jarr[hh,ww,cc]
+    farr = np.rot90(farr, 1, axes=(1,2))
     return farr
 
 
-def jpg2fits(jpgfn=None):
+def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
 
     pic = imageio.imread(jpgfn)  # shape (npixh, npixw, 3)
     # create numpy array of numbers for R G B values
@@ -35,8 +36,9 @@ def jpg2fits(jpgfn=None):
     print("Image converted to", type(img_array), 
           "of", type(img_array[0,0,0]), 
           "and shape", img_array.shape)
+    
 
-    fig = plt.figure(figsize = (4.0,5.0))
+    fig = plt.figure(num=1, figsize = jpgfig_inches)
     fig.tight_layout()
 
     print('\tImage type: ' , type(pic))
@@ -50,12 +52,12 @@ def jpg2fits(jpgfn=None):
     print('\tMinimum RGB values in this image {}, R {} G {} B {}'.format(pic.min(),
            pic[:,:,0].min(), pic[:,:,1].min(), pic[:,:,2].min()))
 
-    print("\nTo continue, click the image window's top left corner button")
+    #print("\nTo continue, click the image window's top left corner button")
     plt.imshow(pic)
-    plt.show()
+    #plt.show()
     
     # Now split channels to visualize with colors:
-    fig, ax = plt.subplots(nrows = 2, ncols=3, figsize=(9,8))
+    fig, ax = plt.subplots(nrows = 2, ncols=3, figsize=(jpgfig_inches[0]*2+1,jpgfig_inches[1]*2+1))
     fig.tight_layout()
 
     titles = ("R", "G", "B",
@@ -78,15 +80,12 @@ def jpg2fits(jpgfn=None):
         plt.imshow(img_array[:,:,c], cmap=plt.cm.get_cmap('gray'))
         plt.title(titles[c+3], fontsize=10)
         img_array_fits = fitsorder(img_array)
-        # change the slice's orientation to suit DS9 fits viewer
-        #mg_array_fits[:,:,c] = np.rot90(img_array[:,:,c], 3) # good for square images
-        #img_array_fits[c,:,:] = np.rot90(img_array[:,:,c], 3)
-        # (I don't know how to "rot -90"...)
 
     plt.savefig(jpgfn.replace('jpg','pdf'))
     # change the array's axes sequence to suit fits writing using T (transpose)
     rgb = "RGB"
     for c in range(3):
+        #its.PrimaryHDU(data=np.rot90(img_array_fits[c,:,:],1)).writeto(
         fits.PrimaryHDU(data=img_array_fits[c,:,:]).writeto(
                                                  jpgfn.replace('.jpg',rgb[c]+'.fits'),
                                                  overwrite=True)
@@ -103,4 +102,6 @@ def jpg2fits(jpgfn=None):
 
 if __name__ == "__main__":
     #jpg2fits(jpgfn="Roses_rgb.jpg")
-    jpg2fits(jpgfn="Gigi_in_Central_Park.jpg")
+    jpg2fits(jpgfn="Gigi_in_Central_Park.jpg", jpgfig_inches = (4.0,5.0))
+    " http://twanight.org/newTWAN/photographers_about.asp?photographer=Taha%20Ghouchkanlu"
+    #jpg2fits(jpgfn="TahaGhouchkanluTLE2018_1024lab.jpg", jpgfig_inches = (5.0,3.0))
