@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 """
-anand0xff@gmil.com  anand@stsci.edu 12 2019
+    Code to calculate and display pinhole camera characteristics
+    Written to support AstroScholars 2020
+    started: Anand Sivaramakrishnan Dec 2019
 """
 import os, sys
 import numpy as np
@@ -38,9 +40,9 @@ resols = []
 
 """
  d =   10 um, res = 5.75e-02 rad (3.29 deg)  f/10000  f*lambda 5750.0 um = 1531.6 pixels
-  Hole dia.       Angular resolution         Aperture     Resolution on detector
+  Hole dia.       Angular resolution         Aperture       Resolution on detector
 """
-coltitle = "  Hole dia.       Angular resolution          Aperture     Resolution on detector"
+coltitle = "  Hole dia.       Angular resolution            Aperture       Resolution on detector"
 for bnd,lam in zip(band,lams):
     print("\nWavelength {:s} = {:.2f} um".format(bnd, lam/um))
     print(coltitle)
@@ -50,6 +52,6 @@ for bnd,lam in zip(band,lams):
         print("  res = {:.2e} rad ({:.2f} deg)".format(resols[-1], 
                                                       resols[-1]/deg), 
                                                       end="")
-        print("  f/{:<5.0f}  f*lambda {:6.1f} um ".format(F/d, F/d*lam/um), end="")
+        print("    f/{:<5.0f}  f*lambda {:6.1f} um ".format(F/d, F/d*lam/um), end="")
         print("= {:<6.1f} pixels".format(F*resols[-1]/pixel))
 print()

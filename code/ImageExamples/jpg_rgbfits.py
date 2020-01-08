@@ -3,8 +3,8 @@
     Code to split a jpg image into R,G,B channels and write them as fits files
 
     After  https://www.codementor.io/@innat_2k14/image-data-analysis-using-numpy-opencv-part-1-kfadbafx6 
-    Written to support AstroScholars 2019
-    started: anand@stsci.edu December 2019
+    Written to support AstroScholars 2020
+    started: Anand Sivaramakrishnan Dec 2019
 """
 import os, sys
 import imageio
