@@ -101,7 +101,8 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
     plt.show()
 
 if __name__ == "__main__":
-    #jpg2fits(jpgfn="Roses_rgb.jpg")
-    jpg2fits(jpgfn="Gigi_in_Central_Park.jpg", jpgfig_inches = (4.0,5.0))
-    " http://twanight.org/newTWAN/photographers_about.asp?photographer=Taha%20Ghouchkanlu"
+    if len(sys.argv) < 2: sys.exit("\n\tI need a jpg file.  Give me a jpg file as an argument. E.g.:\n\t(astroconda) bash$ python jpg_rgbfits.py Gigi_in_Central_Park.jpg\n")
+    else: jpg2fits(jpgfn=sys.argv[1])
+    #jpg2fits(jpgfn="Gigi_in_Central_Park.jpg", jpgfig_inches = (4.0,5.0))
+    #" http://twanight.org/newTWAN/photographers_about.asp?photographer=Taha%20Ghouchkanlu"
     #jpg2fits(jpgfn="TahaGhouchkanluTLE2018_1024lab.jpg", jpgfig_inches = (5.0,3.0))
