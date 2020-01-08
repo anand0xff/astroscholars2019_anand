@@ -1,4 +1,4 @@
-## astroscholars2019_anand
+## astroscholars_anand
 Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is the python environment being used.
 Code started 2019
 
