@@ -1,5 +1,6 @@
 ## astroscholars2019_anand
-Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is the python environmenr being used.
+Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is the python environment being used.
+Code started 2019
 
 - Examine RGB channels of jpg images, write separate FITS files for each channel
 
