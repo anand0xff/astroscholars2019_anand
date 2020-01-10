@@ -20,4 +20,4 @@ Code started 2019
 	The only small "issue" is that the program prints a message 
 	
 		"Click on the upper left corner to close the image" 
-On Windows it's the **upper right corner**. 
+	On Windows it's the **upper right corner**. 
