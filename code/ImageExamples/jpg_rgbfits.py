@@ -28,7 +28,7 @@ def fitsorder(jarr):
     return farr
 
 
-def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
+def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
 
     pic = imageio.imread(jpgfn)  # shape (npixh, npixw, 3)
     # create numpy array of numbers for R G B values
@@ -52,9 +52,9 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
     print('\tMinimum RGB values in this image {}, R {} G {} B {}'.format(pic.min(),
            pic[:,:,0].min(), pic[:,:,1].min(), pic[:,:,2].min()))
 
-    #print("\nTo continue, click the image window's top left corner button")
-    plt.imshow(pic)
-    #plt.show()
+    if show: 
+        print("\nTo continue, click the image window's top left corner button")
+        plt.imshow(pic)
     
     # Now split channels to visualize with colors:
     fig, ax = plt.subplots(nrows = 2, ncols=3, figsize=(jpgfig_inches[0]*2+1,jpgfig_inches[1]*2+1))
@@ -71,21 +71,24 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
         split_img = np.zeros(pic.shape, dtype="uint8")
         # fill in only one channel... R G or B
         split_img[ :, :, c] = pic[ :, :, c]
-        plt.imshow(split_img)
+        if show: plt.imshow(split_img)
         plt.title(titles[c])
 
     # display each channel and show in greyscale
     for c, ax_ in zip(range(3), ax[1,:]):
-        plt.subplot(2, 3, c+1+3)
-        plt.imshow(img_array[:,:,c], cmap=plt.cm.get_cmap('gray'))
-        plt.title(titles[c+3], fontsize=10)
+        if show: 
+            plt.subplot(2, 3, c+1+3)
+            plt.imshow(img_array[:,:,c], cmap=plt.cm.get_cmap('gray'))
+            plt.title(titles[c+3], fontsize=10)
         img_array_fits = fitsorder(img_array)
 
-    plt.savefig(jpgfn.replace('jpg','pdf'))
+    if show: plt.savefig(jpgfn.replace('jpg','pdf'))
     # change the array's axes sequence to suit fits writing using T (transpose)
     rgb = "RGB"
     for c in range(3):
         #its.PrimaryHDU(data=np.rot90(img_array_fits[c,:,:],1)).writeto(
+        # lower the case of '.jpg'
+        jpgfn = jpgfn.replace('.JPG','jpg')
         fits.PrimaryHDU(data=img_array_fits[c,:,:]).writeto(
                                                  jpgfn.replace('.jpg',rgb[c]+'.fits'),
                                                  overwrite=True)
@@ -97,8 +100,8 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0)):
     print("\tRGB data written as three separate fits files", 
           jpgfn.replace('.jpg','[RGB].fits'))
     print("\tOpen the fits files with DS9 to view them and explore their contents.")
-    print("\nTo exit, click the image window's top left corner button")
-    plt.show()
+    if show: print("\nTo exit, click the image window's top left corner button")
+    if show: plt.show()
 
 if __name__ == "__main__":
     if len(sys.argv) < 2: sys.exit("\n\tI need a jpg file.  Give me a jpg file as an argument. E.g.:\n\t(astroconda) bash$ python jpg_rgbfits.py Gigi_in_Central_Park.jpg\n")
