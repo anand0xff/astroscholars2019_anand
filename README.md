@@ -1,16 +1,16 @@
 ## astroscholars_anand
-Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is the python environment being used.
-Code started 2019
+Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is the python environment being used.  Code available at [https://github.com/anand0xff/astroscholars_anand](https://github.com/anand0xff/astroscholars_anand) (download a zip on Windows or clone from this location on UNIX)
 
 - Examine RGB channels of jpg images, write separate FITS files for each channel. 
 
-- On a **Unix** command line:
+- On a **Unix** command line, to deconstruct a jpg image into R, G, B:
 
-		(astroconda) bash$ cd /code/ImageExamples
+		(astroconda) bash$ cd astroscholars_anand/code/ImageExamples
 		(astroconda) bash$ python jpg_rgbfits.py anyfile.jpg
 
-- Pinhole camera predictions
+	Pinhole camera predictions
 
+		(astroconda) bash$ cd astroscholars_anand/code
 		(astroconda) bash$ python photo_pinhole.py
 		
 - Here's what Nadia did to run python on **Windows**:
