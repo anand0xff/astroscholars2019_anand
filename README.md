@@ -31,8 +31,8 @@ Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is t
 
 [Understanding focal length](http://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/foclen.html)  
 [Image formation: ray tracing through a lens](https://www.physicsclassroom.com/class/refrn/Lesson-5/Converging-Lenses-Ray-Diagrams)  
-[Pinhole diffraction in ocean waves](https://www.flickr.com/photos/exploratorium/3789624153/:w
-)  
+[Pinhole diffraction in ocean waves](https://www.flickr.com/photos/exploratorium/3789624153/Other mate)  
 [Interference, diffraction, superposition, Huygen's Principle](https://www.thoughtco.com/interference-diffraction-principle-of-superposition-2699048)  
 [Pixel scale and resolution element size](https://github.com/anand0xff/astroscholars_anand/blob/master/PLSCL.pdf)   
 [Simple and multi-element lens focal length](https://photo.stackexchange.com/questions/21668/what-is-the-reference-point-that-the-focal-length-of-a-lens-is-calculated-from)  
+[Adaptive optics: why?](https://www.youtube.com/watch?v=F6hmLcJOkzM)

@@ -5,12 +5,13 @@
     After  https://www.codementor.io/@innat_2k14/image-data-analysis-using-numpy-opencv-part-1-kfadbafx6 
     Written to support AstroScholars 2020
     started: Anand Sivaramakrishnan Dec 2019
+
 """
 import os, sys
 import imageio
 import numpy as np
 from astropy.io import fits
-#%matplotlib inline
+import scipy.misc
 import matplotlib.pyplot as plt
 
 
@@ -31,12 +32,12 @@ def fitsorder(jarr):
 def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
 
     pic = imageio.imread(jpgfn)  # shape (npixh, npixw, 3)
+
     # create numpy array of numbers for R G B values
     img_array = np.asarray(pic)
     print("Image converted to", type(img_array), 
           "of", type(img_array[0,0,0]), 
           "and shape", img_array.shape)
-    
 
     fig = plt.figure(num=1, figsize = jpgfig_inches)
     fig.tight_layout()
@@ -53,7 +54,7 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
            pic[:,:,0].min(), pic[:,:,1].min(), pic[:,:,2].min()))
 
     if show: 
-        print("\nTo continue, click the image window's top left corner button")
+        print("\nTo continue, close the image window")
         plt.imshow(pic)
     
     # Now split channels to visualize with colors:
@@ -103,9 +104,22 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
     if show: print("\nTo exit, click the image window's top left corner button")
     if show: plt.show()
 
+
+# To rebin images... https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#the-image-class
+from PIL import Image
+def imresize(jpgfn, binby=8):
+    pic = imageio.imread(jpgfn)  # shape (npixh, npixw, 3)
+    smalpic = Image.open(jpgfn)
+    smalpic = smalpic.resize((pic.shape[1]//4, pic.shape[0]//4), resample=Image.BILINEAR) # swap 0 and 1!!!
+    jpgfn = jpgfn.replace('.JPG','.jpg')
+    smalpic.save(jpgfn.replace(".jpg","_bin{:d}x{:d}.jpg".format(binby,binby)))
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2: sys.exit("\n\tI need a jpg file.  Give me a jpg file as an argument. E.g.:\n\t(astroconda) bash$ python jpg_rgbfits.py Gigi_in_Central_Park.jpg\n")
-    else: jpg2fits(jpgfn=sys.argv[1])
+    else: 
+        imresize(jpgfn=sys.argv[1], binby=8)
+        jpg2fits(jpgfn=sys.argv[1])
     #jpg2fits(jpgfn="Gigi_in_Central_Park.jpg", jpgfig_inches = (4.0,5.0))
     #" http://twanight.org/newTWAN/photographers_about.asp?photographer=Taha%20Ghouchkanlu"
     #jpg2fits(jpgfn="TahaGhouchkanluTLE2018_1024lab.jpg", jpgfig_inches = (5.0,3.0))
