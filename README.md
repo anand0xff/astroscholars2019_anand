@@ -27,11 +27,14 @@ Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is t
 	On Windows it's the **upper right corner**. 
 
 #### Monday's class: salient points?
-	What did each of you particularly like or recall from Monday's project work?
+	What did each of you particularly like or recall from
+	Monday's project work?
 
 ##### Monday's material for presentation:
 
-	I put 8x8 binned images up on the github site with a filelist.txt containing image creation dates/times, some explanation if you want to use these.
+	I put 8x8 binned images up on the github site with a filelist.txt 
+	containing image creation dates/times, and some explanation if
+	you want to use these.
 	
 	
 #### Useful links
