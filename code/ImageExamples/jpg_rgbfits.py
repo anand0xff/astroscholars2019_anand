@@ -107,12 +107,15 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
 
 # To rebin images... https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#the-image-class
 from PIL import Image
-def imresize(jpgfn, binby=8):
+def imresize(jpgfn, binby=8, nowrite=False):
     pic = imageio.imread(jpgfn)  # shape (npixh, npixw, 3)
     smalpic = Image.open(jpgfn)
     smalpic = smalpic.resize((pic.shape[1]//4, pic.shape[0]//4), resample=Image.BILINEAR) # swap 0 and 1!!!
     jpgfn = jpgfn.replace('.JPG','.jpg')
-    smalpic.save(jpgfn.replace(".jpg","_bin{:d}x{:d}.jpg".format(binby,binby)))
+    if nowrite == False:
+        smalpic.save(jpgfn.replace(".jpg","_bin{:d}x{:d}.jpg".format(binby,binby)))
+    else:
+        print(jpgfn.replace(".jpg","_bin{:d}x{:d}.jpg".format(binby,binby)), "would be written")
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     for fn in glob.glob(datadir+"*.JPG"):
         print('\t', fn)
-        rgb.imresize(jpgfn=datadir+fn, binby=8)
+        rgb.imresize(jpgfn=fn, binby=8)
 
         # convert jpg to fits
         #rgb.jpg2fits(jpgfn=datadir+fn, jpgfig_inches = (3.0,2.0), show=False)
