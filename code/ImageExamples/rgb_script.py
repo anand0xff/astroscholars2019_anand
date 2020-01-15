@@ -11,12 +11,13 @@ import jpg_rgbfits as rgb
 
 if __name__ == "__main__":
 
-    # Perform on each JPG file in data directory...
+    # Perform rebinning on out-of-camera JPGs in data directory, 
+    # write smaller jpgs to the same directory...
     datadir = "../../epl5-astroschol_bin8x8/"
 
     for fn in glob.glob(datadir+"*.JPG"):
         print('\t', fn)
         rgb.imresize(jpgfn=fn, binby=8)
 
-        # convert jpg to fits
-        #rgb.jpg2fits(jpgfn=datadir+fn, jpgfig_inches = (3.0,2.0), show=False)
+   # convert a single jpg to fits
+   #rgb.jpg2fits(jpgfn=datadir+fn, jpgfig_inches = (3.0,2.0), show=False)
