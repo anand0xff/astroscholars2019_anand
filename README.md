@@ -17,20 +17,19 @@ Material to support Anand's "Telescopes and Optic" lab.  Assumes astroconda is t
 		(astroconda) bash$ cd astroscholars_anand/code
 		(astroconda) bash$ python photo_pinhole.py
 		
-- Here's what Nadia did to run python on **Windows**:
+- To run python on **Windows**:
 
 	In the Windows "App Start" menu I searched for "Anaconda" and started the Anaconda  terminal power shell. I cd-ed to the appropriate directory and ran the commands shown above.
 
-	The only small "issue" is that the program prints a message 
-	
-		"Click on the upper left corner to close the image" 
-	On Windows it's the **upper right corner**. 
 
 #### Monday's class
 
 - Understandable quantification of a radian
 - Combination of math of resolution limit and practical hands on demo with pinholes
 - Raytracing to understand image formation
+- [Thin lens equation](https://en.wikipedia.org/wiki/Thin_lens) in "Image Formation" related object distance, image distance, and lens focal length 
+- Larger pinholes produce larger [circle of confusion](https://en.wikipedia.org/wiki/Circle_of_confusion) blur
+- Smaller pinholes crate larger diffraction blur: the Point-Spread function is an [Airy pattern](https://en.wikipedia.org/wiki/Airy_disk).
 
 Monday's data:
 
@@ -64,8 +63,7 @@ Discussion of resolution: radio meter wavelengths, optical micron wavelength, X-
    (out-of-plane corrugation) of the ** wavefront **.  A wavefront is a
    surface of constant phase.  The wave moves in the z direction at
    speed w/k (why is that so? What is actually moving?).
-   Wikipedia has a nice 
-   [animated review](https://en.wikipedia.org/wiki/Plane_wave) of this.
+
 
    We often drop the "purely propagating" multiplicative factor, exp(i(kx - wt)),
    of the phasor, and just work on the in-plane phase disturbances exp(i
@@ -92,6 +90,8 @@ Select a good image, split it into separate fits files, look at the three channe
 	You might have to comment out a few lines in rgb_script.py and uncomment
 	the call to splitting a jpg file into fits and showing the jpg &
 	numerical values.
+	
+	Two sets of fits files & pdfs from Tuesday's data: RGlasers_exps38_59.zip 
 
 ##### Possible start-to-finish instrumentation exercise
 
@@ -106,8 +106,13 @@ Select a good image, split it into separate fits files, look at the three channe
 
 #### Wednesday's class
 
-Pupil (or aperture) planes, image planes (using camera)  
-Telescope magnification  
+#### Pupil (or aperture) planes, image planes (using camera)
+- partially obscuring the camera lens (i.e. pupil) dims the image but doesn't change it substantially.  So we know each point in the image gets light from every part of the pupil
+- partially covering the image just blocks off part of the image
+- The lens creates an image whether or not there is a screen to make it visible!  If there is no screen or detector at the image plane, an aerial image is formed, and light simply goes on past that plane
+-Use an **eyepiece** (another convex lens) to ispect that aerial image closely.  The [angular magnification](http://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/teles.html) of this telescope is the ratio of objective (front lens) focal length to eyepiece focal length.
+
+
 
 	In class - develop a presentation plan & initial list of what to cover.  Divide and conquer, but teach each other too.
 
