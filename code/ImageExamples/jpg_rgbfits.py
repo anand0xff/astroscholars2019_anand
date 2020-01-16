@@ -56,6 +56,7 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
     if show: 
         print("\nTo continue, close the image window")
         plt.imshow(pic)
+        plt.savefig(jpgfn.replace('.jpg','_input.pdf'))
     
     # Now split channels to visualize with colors:
     fig, ax = plt.subplots(nrows = 2, ncols=3, figsize=(jpgfig_inches[0]*2+1,jpgfig_inches[1]*2+1))
@@ -87,7 +88,6 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
     # change the array's axes sequence to suit fits writing using T (transpose)
     rgb = "RGB"
     for c in range(3):
-        #its.PrimaryHDU(data=np.rot90(img_array_fits[c,:,:],1)).writeto(
         # lower the case of '.jpg'
         jpgfn = jpgfn.replace('.JPG','jpg')
         fits.PrimaryHDU(data=img_array_fits[c,:,:]).writeto(
@@ -101,7 +101,7 @@ def jpg2fits(jpgfn=None, jpgfig_inches = (4.0,5.0), show=True):
     print("\tRGB data written as three separate fits files", 
           jpgfn.replace('.jpg','[RGB].fits'))
     print("\tOpen the fits files with DS9 to view them and explore their contents.")
-    if show: print("\nTo exit, click the image window's top left corner button")
+    if show: print("\nTo exit, close the image window")
     if show: plt.show()
 
 
@@ -121,7 +121,7 @@ def imresize(jpgfn, binby=8, nowrite=False):
 if __name__ == "__main__":
     if len(sys.argv) < 2: sys.exit("\n\tI need a jpg file.  Give me a jpg file as an argument. E.g.:\n\t(astroconda) bash$ python jpg_rgbfits.py Gigi_in_Central_Park.jpg\n")
     else: 
-        imresize(jpgfn=sys.argv[1], binby=8)
+        #imresize(jpgfn=sys.argv[1], binby=8)
         jpg2fits(jpgfn=sys.argv[1])
     #jpg2fits(jpgfn="Gigi_in_Central_Park.jpg", jpgfig_inches = (4.0,5.0))
     #" http://twanight.org/newTWAN/photographers_about.asp?photographer=Taha%20Ghouchkanlu"
